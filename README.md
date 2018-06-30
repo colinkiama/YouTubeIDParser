@@ -6,7 +6,7 @@ Gets the YouTube ID from a YouTube link
 
 ## How to install:
 Open the Nuget Package Manager console and enter this command:
-Install-Package YouTubeIDParser.ColinKiama
+`Install-Package YouTubeIDParser.ColinKiama`
 
 or...
 
