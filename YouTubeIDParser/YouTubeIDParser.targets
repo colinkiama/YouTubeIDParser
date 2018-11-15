@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <YouTubeIDParser-Platform Condition="'$(Platform)' == 'Win32'">x86</YouTubeIDParser-Platform>
+        <YouTubeIDParser-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</YouTubeIDParser-Platform>
+    </PropertyGroup>
+    <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
+        <Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\YouTubeIDParser.winmd">
+            <Implementation>YouTubeIDParser.dll</Implementation>
+        </Reference>
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(YouTubeIDParser-Platform)\native\YouTubeIDParser.dll" />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>YoutubeIDParser.ColinKiama</id>
+    <version>1.2.0.0</version>
+    <title>Youtube ID Parser</title>
+    <authors>COlin Kiama</authors>
+    <owners>colinkiama</owners>
+    <licenseUrl>https://raw.githubusercontent.com/colinkiama/YouTubeIDParser/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/colinkiama/YouTubeIDParser</projectUrl>
+    <iconUrl>https://i.imgur.com/KQoRNOI.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Gets the YouTube ID from a YouTube URL</description>
+    <releaseNotes>Parser now has perfect success rates (at this time).</releaseNotes>
+    <copyright>Copyright Colin Kiama 2018</copyright>
+    <tags>youtube id parser youtubeidparser easy productive fast parse parsing yt uwp</tags>
+  </metadata>
+  
+  <files>
+
+    <!-- WinMd and IntelliSense files -->
+    <file src=".\bin\Release\YoutubeIDParser.winmd" target="lib\uap10.0"/>
+    <file src=".\bin\Release\YoutubeIDParser.xml" target="lib\uap10.0"/>
+
+    <!-- DLLs and resources -->
+    <file src=".\bin\ARM\Release\YoutubeIDParser.pri" target="runtimes\win10-arm\native"/>
+
+    <file src=".\bin\ARM\Release\YoutubeIDParser.pri" target="runtimes\win10-x64\native"/>
+
+    <file src=".\bin\ARM\Release\YoutubeIDParser.pri" target="runtimes\win10-x86\native"/>
+
+    <!-- .targets -->
+    <file src="YoutubeIDParser.targets" target="build\native"/>
+
+  </files> 
+ 
+</package>
