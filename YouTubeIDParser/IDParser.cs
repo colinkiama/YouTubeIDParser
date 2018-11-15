@@ -2,85 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace YouTubeIDParser
 {
     public sealed class YTIDParser
     {
+        const string videoIDMatchRegexString = "(?:youtube\\.com\\/(?:[^\\/]+\\/.+\\/|(?:v|e(?:mbed)?)\\/|.*[?&]v=)|youtu\\.be\\/)([^\" &?\\/ ]{11})";
 
-        private string GetVideoIDFromUrl(string url)
+        const string notFoundVideoID = "noVideoFound";
+        static Regex regularExpression = new Regex(videoIDMatchRegexString, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+        
+        /// <summary>
+        /// Will return the video ID if a video ID is found from the URL. Else, the method will return "noVideoFound".
+        /// </summary>
+        /// <param name="videoUrl"></param>
+        /// <returns></returns>
+        public static string Parse(string videoUrl)
         {
+            string videoIDToReturn = notFoundVideoID;
 
-            string videoID = "";
+            MatchCollection matches = regularExpression.Matches(videoUrl);
 
-
-            if (url.Contains("http"))
+            if (matches.Count > 0)
             {
-                if (url.Contains("https"))
+                if (matches[0].Groups.Count > 1)
                 {
-                    url = url = url.Replace("https://", "");
-                }
-                else
-                {
-                    url = url.Replace("http://", "");
-                }
-            }
+                    // Because of the nature of the regex string
+                    // the video ID will always be in the second group (Index 1).
+                    videoIDToReturn = matches[0].Groups[1].Value;
 
-
-            if (url.Contains("www"))
-            {
-                url = url.Replace("www.", "");
-            }
-
-
-            if (url.Contains("m.youtube.com"))
-            {
-                if (url.Contains("m.youtube.com/embed"))
-                {
-                    videoID = url.Replace("m.youtube.com/embed/", "");
-                }
-                else
-                {
-                    videoID = url.Replace("m.youtube.com/watch?v=", "");
                 }
             }
 
-            else if (url.Contains("youtube.com"))
-            {
-                if (url.Contains("youtube.com/embed"))
-                {
-                    videoID = url.Replace("youtube.com/embed/", "");
-                }
-                else
-                {
-                    videoID = url.Replace("youtube.com/watch?v=", "");
-                }
-
-            }
-
-
-            else if (url.Contains("youtu.be"))
-            {
-                videoID = url.Replace("youtu.be/", "");
-
-            }
-
-            else videoID = $"{url} is invalid.";
-
-            byte videoIDLength = (byte)videoID.Length;
-            if (videoID[videoIDLength - 2] == '?' && videoID[videoIDLength - 1] == 'a')
-            {
-                videoID = videoID.Remove(videoIDLength - 2, 2);
-            }
-
-            if (videoID.Contains("?autoplay"))
-            {
-                int startOfRemoval = videoID.LastIndexOf("?autoplay");
-                videoID = videoID.Remove(startOfRemoval);
-            }
-
-            return videoID;
+            return videoIDToReturn;
         }
+
     }
 }
